@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 void main() {
   runApp(new MaterialApp(
@@ -13,6 +14,36 @@ class MyApp extends StatefulWidget {
 
 class _State extends State<MyApp> {
 
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('This is a demo alert dialog.'),
+                Text('Would you like to approve of this message?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Approve'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
+  /*
   final GlobalKey<ScaffoldState> _scaffoldState =new GlobalKey<ScaffoldState>();
   void showbar()
   {
@@ -20,7 +51,7 @@ class _State extends State<MyApp> {
   }
 
  // Bottom sheet code
-  /*
+
   void _showbottom()
   {
     showModalBottomSheet<void>(
@@ -48,7 +79,7 @@ class _State extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      key: _scaffoldState,
+     // key: _scaffoldState,
       appBar: new AppBar(
         title: new Text('My First App'),
       ),
@@ -57,8 +88,9 @@ class _State extends State<MyApp> {
         child: new Column(
           children: <Widget>[
             new Text('Abdullah Sheikh'),
-           new RaisedButton(onPressed: showbar, child: new Text("Click me"),),
+           // new RaisedButton(onPressed: showbar, child: new Text("Click me"),),
            // new RaisedButton(onPressed: _showbottom, child:new Text("Click me"),)
+            new RaisedButton(onPressed: _showMyDialog, child:new Text("Click me"),)
           ],
         ),
       ),
