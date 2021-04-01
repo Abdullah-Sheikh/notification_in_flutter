@@ -13,7 +13,14 @@ class MyApp extends StatefulWidget {
 
 class _State extends State<MyApp> {
 
+  final GlobalKey<ScaffoldState> _scaffoldState =new GlobalKey<ScaffoldState>();
+  void showbar()
+  {
+    _scaffoldState.currentState.showSnackBar(new SnackBar(content:new Text("Data Upload")));
+  }
 
+ // Bottom sheet code
+  /*
   void _showbottom()
   {
     showModalBottomSheet<void>(
@@ -35,10 +42,13 @@ class _State extends State<MyApp> {
     );
   }
 
+   */
+
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      key: _scaffoldState,
       appBar: new AppBar(
         title: new Text('My First App'),
       ),
@@ -47,7 +57,8 @@ class _State extends State<MyApp> {
         child: new Column(
           children: <Widget>[
             new Text('Abdullah Sheikh'),
-            new RaisedButton(onPressed: _showbottom, child:new Text("Click me"),)
+           new RaisedButton(onPressed: showbar, child: new Text("Click me"),),
+           // new RaisedButton(onPressed: _showbottom, child:new Text("Click me"),)
           ],
         ),
       ),
